@@ -4,6 +4,10 @@ Simple React App using Typescript Redux Styled Components and Airbnb style guide
 
 [![wakatime](https://wakatime.com/badge/github/sergiogomes/my-favourite-cars.svg)](https://wakatime.com/badge/github/sergiogomes/my-favourite-cars)
 
+![package version](https://img.shields.io/github/package-json/v/sergiogomes/my-favourite-cars/main?label=version&logo=npm)
+
+![vercel](https://img.shields.io/github/deployments/sergiogomes/my-favourite-cars/production?label=vercel&logo=vercel&logoColor=white)
+
 ## Requiremets
 
 - The app must use React;
