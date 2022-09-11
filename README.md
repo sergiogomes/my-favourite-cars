@@ -2,7 +2,7 @@
 
 Simple React App using Typescript Redux Styled Components and Airbnb style guide
 
-[![wakatime](https://wakatime.com/badge/user/4d75b403-9976-4dad-86b5-5d2f55fe6075/project/6d688bab-70ae-40ff-a59e-839718cbdbb4.svg)](https://wakatime.com/badge/user/4d75b403-9976-4dad-86b5-5d2f55fe6075/project/6d688bab-70ae-40ff-a59e-839718cbdbb4)
+[![wakatime](https://wakatime.com/badge/github/sergiogomes/my-favourite-cars.svg)](https://wakatime.com/badge/github/sergiogomes/my-favourite-cars)
 
 ## Requiremets
 
