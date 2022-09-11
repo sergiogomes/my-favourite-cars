@@ -31,7 +31,9 @@ These are the pages we need
 ### Home
 
 On the home page, we should be able to filter by name, edit and delete a car
+![image](https://user-images.githubusercontent.com/5064727/189524308-569269b2-8311-48ed-8704-d4e7f8eb35c7.png)
 
 ### Add New Car
 
 On the Add New Car page, we should be able to submit only if the form is valid
+![image](https://user-images.githubusercontent.com/5064727/189524332-b6ebc406-4486-4f95-a8ca-41f392392731.png)
