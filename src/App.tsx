@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link, Outlet } from 'react-router-dom';
+
 import logo from './assets/images/logo.svg';
-import Counter from './features/counter/Counter';
 import './App.css';
 import Button from './style/elements/Button';
 
@@ -9,8 +10,10 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
         <Button type="button">Styles Components Test</Button>
+        <Link to="/counter">Counter</Link>
+        <Link to="/cars">Cars</Link>
+        <Link to="/brands">Brands</Link>
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
@@ -53,6 +56,10 @@ function App() {
           </a>
         </span>
       </header>
+      <Outlet />
+      <footer>
+        <p>This is a footer</p>
+      </footer>
     </div>
   );
 }
