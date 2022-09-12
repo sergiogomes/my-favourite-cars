@@ -8,17 +8,19 @@ import Section from './Section';
 import Copyright from './Copyright';
 
 const StyledFooter: any = styled.footer`
+  height: 400px;
   position: absolute;
   bottom: 0;
   background: #fff;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: space-around;
   width: 100%;
   border-top: 1px solid #eaeaea;
 
-  @media ${device.laptop} {
+  @media ${device.tablet} {
+    flex-direction: row;
     height: 200px;
   }
 `;
