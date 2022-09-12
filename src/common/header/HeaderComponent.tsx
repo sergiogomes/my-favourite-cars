@@ -9,7 +9,7 @@ export default function HeaderComponent() {
     <StyledHeader>
       <StyledHeader.Menu>|||</StyledHeader.Menu>
       <StyledHeader.Logo>
-        <img src={logoBrand} className="App-logo" alt="logo" />
+        <img src={logoBrand} alt="logo brand" />
       </StyledHeader.Logo>
       <StyledHeader.Links>
         <StyledHeader.Link>

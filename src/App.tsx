@@ -1,6 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 
+import FooterComponent from './common/footer';
 import HeaderComponent from './common/header';
 
 function App() {
@@ -8,9 +9,7 @@ function App() {
     <div className="App">
       <HeaderComponent />
       <Outlet />
-      <footer>
-        <p>This is a footer</p>
-      </footer>
+      <FooterComponent />
     </div>
   );
 }
