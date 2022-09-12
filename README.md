@@ -75,3 +75,13 @@ The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+
+## References
+
+### Folder structure
+
+<https://javascript.plainenglish.io/how-to-structure-your-react-redux-app-83d523851137>
+
+### Styled Components
+
+<https://alanbsmith.medium.com/structuring-our-styled-components-part-i-2bf21fa64b28>
