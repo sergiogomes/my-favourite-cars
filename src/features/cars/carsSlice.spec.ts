@@ -7,28 +7,36 @@ import carsReducer, {
 
 describe('cars reducer', () => {
   const initialState: CarsState = {
-    value: [],
+    list: [],
     status: 'idle',
   };
   it('should handle initial state', () => {
     expect(carsReducer(undefined, { type: 'unknown' })).toEqual({
-      value: [],
+      list: [],
       status: 'idle',
     });
   });
 
   it('should handle increment', () => {
     const actual = carsReducer(initialState, increment());
-    expect(actual.value.length).toEqual(1);
+    expect(actual.list.length).toEqual(1);
   });
 
   it('should handle decrement', () => {
     const actual = carsReducer(initialState, decrement());
-    expect(actual.value.length).toEqual(0);
+    expect(actual.list.length).toEqual(0);
   });
 
   it('should handle incrementByAmount', () => {
-    const actual = carsReducer(initialState, incrementByAmount(2));
-    expect(actual.value.length).toEqual(1);
+    const actual = carsReducer(
+      initialState,
+      incrementByAmount({
+        id: 0,
+        name: 'Gol',
+        brand: 'Volkswagen',
+        hp: 165,
+      }),
+    );
+    expect(actual.list.length).toEqual(1);
   });
 });

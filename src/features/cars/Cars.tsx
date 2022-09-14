@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import {
@@ -6,20 +7,28 @@ import {
   increment,
   incrementByAmount,
   incrementAsync,
-  incrementIfOdd,
   selectCount,
 } from './carsSlice';
 import styles from './Cars.module.css';
+import { ICar } from '../../interfaces/ICar';
 
 export default function Cars() {
   const cars = useAppSelector(selectCount);
   const dispatch = useAppDispatch();
   const [incrementAmount, setIncrementAmount] = useState('2');
 
-  const incrementValue = Number(incrementAmount) || 0;
+  const incrementValue: ICar = {
+    id: 1,
+    name: 'Gol',
+    brand: 'Volkswagem',
+    hp: 165,
+  };
 
   return (
     <div>
+      <div className={styles.row}>
+        <h1>My Favourite Cars</h1>
+      </div>
       <div className={styles.row}>
         {cars.length > 0 && (
           <table>
@@ -33,7 +42,7 @@ export default function Cars() {
             </thead>
             <tbody>
               {cars.map((car) => (
-                <tr>
+                <tr key={car.id}>
                   <td>{car.id}</td>
                   <td>{car.name}</td>
                   <td>{car.brand}</td>
@@ -84,13 +93,11 @@ export default function Cars() {
         >
           Add HP Async
         </button>
-        <button
-          type="button"
-          className={styles.button}
-          onClick={() => dispatch(incrementIfOdd(incrementValue))}
-        >
-          Add HP If Odd
-        </button>
+      </div>
+      <div className={styles.row}>
+        <Link className={styles.button} to="/add-car">
+          Add New Car
+        </Link>
       </div>
     </div>
   );

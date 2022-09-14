@@ -1,17 +1,17 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import type { RootState, AppThunk } from '../../app/store';
+import type { RootState } from '../../app/store';
 import { ICar } from '../../interfaces/ICar';
 import fetchCount from './carsAPI';
 
 export interface CarsState {
-  value: ICar[];
+  list: ICar[];
   status: 'idle' | 'loading' | 'failed';
 }
 
 const initialState: CarsState = {
-  value: [],
+  list: [],
   status: 'idle',
 };
 
@@ -22,9 +22,11 @@ const initialState: CarsState = {
 // typically used to make async requests.
 export const incrementAsync = createAsyncThunk(
   'cars/fetchCount',
-  async (amount: number) => {
-    const response = await fetchCount(amount);
-    // The value we return becomes the `fulfilled` action payload
+  async (car: ICar, thunkAPI) => {
+    const state = thunkAPI.getState() as RootState;
+    car.id = state.cars.list.length + 1 || 0;
+    const response = await fetchCount(car);
+
     return response.data;
   },
 );
@@ -39,24 +41,19 @@ export const carsSlice = createSlice({
       // doesn't actually mutate the state because it uses the Immer library,
       // which detects changes to a "draft state" and produces a brand new
       // immutable state based off those changes
-      state.value.push({
-        id: state.value.length + 1,
+      state.list.push({
+        id: state.list.length + 1,
         name: 'Polo',
         brand: 'Volkswagem',
         hp: 128,
       });
     },
     decrement: (state) => {
-      state.value.pop();
+      state.list.pop();
     },
     // Use the PayloadAction type to declare the contents of `action.payload`
-    incrementByAmount: (state, action: PayloadAction<number>) => {
-      state.value.push({
-        id: state.value.length + 1,
-        name: 'Polo',
-        brand: 'Volkswagem',
-        hp: action.payload,
-      });
+    incrementByAmount: (state, action: PayloadAction<ICar>) => {
+      state.list.push(action.payload);
     },
   },
   // The `extraReducers` field lets the slice handle actions defined elsewhere,
@@ -68,12 +65,7 @@ export const carsSlice = createSlice({
       })
       .addCase(incrementAsync.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.value.push({
-          id: state.value.length + 1,
-          name: 'Polo',
-          brand: 'Volkswagem',
-          hp: action.payload,
-        });
+        state.list.push(action.payload);
       })
       .addCase(incrementAsync.rejected, (state) => {
         state.status = 'failed';
@@ -83,20 +75,9 @@ export const carsSlice = createSlice({
 
 export const { increment, decrement, incrementByAmount } = carsSlice.actions;
 
-// The function below is called a selector and allows us to select a value from
+// The function below is called a selector and allows us to select a list from
 // the state. Selectors can also be defined inline where they're used instead of
-// in the slice file. For example: `useSelector((state: RootState) => state.cars.value)`
-export const selectCount = (state: RootState) => state.cars.value;
-
-// We can also write thunks by hand, which may contain both sync and async logic.
-// Here's an example of conditionally dispatching actions based on current state.
-export const incrementIfOdd =
-  (amount: number): AppThunk =>
-  (dispatch, getState) => {
-    const currentValue = selectCount(getState());
-    if (currentValue.length % 2 === 1) {
-      dispatch(incrementByAmount(amount));
-    }
-  };
+// in the slice file. For example: `useSelector((state: RootState) => state.cars.list)`
+export const selectCount = (state: RootState) => state.cars.list;
 
 export default carsSlice.reducer;
