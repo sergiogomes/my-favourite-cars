@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useAppDispatch } from '../../app/hooks';
-import { ICar } from '../../interfaces/ICar';
-import { incrementAsync } from '../cars/carsSlice';
+import { useAppDispatch } from '../../../../app/hooks';
+import { ICar } from '../../../../interfaces/ICar';
+import { addCarAsync } from '../../carsSlice';
 import styles from './AddCar.module.css';
 
 const initialState: ICar = {
@@ -29,7 +29,7 @@ export default function AddCar() {
 
   const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
-    dispatch(incrementAsync(car))
+    dispatch(addCarAsync(car))
       .then(() => navigate('/cars'))
       .catch(() => navigate('/error'));
   };
@@ -78,7 +78,7 @@ export default function AddCar() {
         </div>
         <div className={styles.row}>
           <button type="submit" className={styles.asyncButton}>
-            Add Async
+            Add
           </button>
         </div>
       </form>

@@ -1,4 +1,4 @@
-import carsReducer from './carsSlice';
+import carsReducer from '../../carsSlice';
 
 describe('cars reducer', () => {
   it('should handle initial state', () => {

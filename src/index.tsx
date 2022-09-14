@@ -7,9 +7,9 @@ import { store } from './app/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Brands from './features/brands/Brands';
-import Cars from './features/cars/Cars';
-import AddCar from './features/add-car/AddCar';
 import Counter from './features/counter/Counter';
+import Cars from './features/cars';
+import AddCar from './features/cars/components';
 import './index.css';
 
 const container = document.getElementById('root')!;

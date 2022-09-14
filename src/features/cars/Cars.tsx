@@ -1,27 +1,18 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
-import { useAppSelector, useAppDispatch } from '../../app/hooks';
-import {
-  decrement,
-  increment,
-  incrementByAmount,
-  incrementAsync,
-  selectCount,
-} from './carsSlice';
-import styles from './Cars.module.css';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { removeCarAsync, selectCarList } from './carsSlice';
 import { ICar } from '../../interfaces/ICar';
+import styles from './Cars.module.css';
 
 export default function Cars() {
-  const cars = useAppSelector(selectCount);
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [incrementAmount, setIncrementAmount] = useState('2');
+  const cars = useAppSelector(selectCarList);
 
-  const incrementValue: ICar = {
-    id: 1,
-    name: 'Gol',
-    brand: 'Volkswagem',
-    hp: 165,
+  const handleDelete = (car: ICar) => {
+    dispatch(removeCarAsync(car)).catch(() => navigate('/error'));
   };
 
   return (
@@ -38,6 +29,7 @@ export default function Cars() {
                 <th>NAME</th>
                 <th>BRAND</th>
                 <th>HORSEPOWER</th>
+                <th>ACTIONS</th>
               </tr>
             </thead>
             <tbody>
@@ -47,52 +39,23 @@ export default function Cars() {
                   <td>{car.name}</td>
                   <td>{car.brand}</td>
                   <td>{car.hp}</td>
+                  <td>
+                    <Link className={styles.button} to={`/cars/${car.id}`}>
+                      Edit
+                    </Link>
+                    <button
+                      type="button"
+                      className={styles.asyncButton}
+                      onClick={() => handleDelete(car)}
+                    >
+                      Remove
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         )}
-      </div>
-      <div className={styles.row}>
-        <button
-          type="button"
-          className={styles.button}
-          aria-label="Decrement value"
-          onClick={() => dispatch(decrement())}
-        >
-          Remove Polo
-        </button>
-        <span className={styles.value}>{cars.length}</span>
-        <button
-          type="button"
-          className={styles.button}
-          aria-label="Increment value"
-          onClick={() => dispatch(increment())}
-        >
-          Add Polo
-        </button>
-      </div>
-      <div className={styles.row}>
-        <input
-          className={styles.textbox}
-          aria-label="Set increment amount"
-          value={incrementAmount}
-          onChange={(e) => setIncrementAmount(e.target.value)}
-        />
-        <button
-          type="button"
-          className={styles.button}
-          onClick={() => dispatch(incrementByAmount(incrementValue))}
-        >
-          Add HP
-        </button>
-        <button
-          type="button"
-          className={styles.asyncButton}
-          onClick={() => dispatch(incrementAsync(incrementValue))}
-        >
-          Add HP Async
-        </button>
       </div>
       <div className={styles.row}>
         <Link className={styles.button} to="/add-car">
