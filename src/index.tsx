@@ -7,8 +7,9 @@ import { store } from './app/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Brands from './features/brands/Brands';
-import Cars from './features/cars/Cars';
 import Counter from './features/counter/Counter';
+import Cars from './features/cars';
+import AddCar from './features/cars/components';
 import './index.css';
 
 const container = document.getElementById('root')!;
@@ -23,6 +24,7 @@ root.render(
             <Route path="counter" element={<Counter />} />
             <Route path="brands" element={<Brands />} />
             <Route path="cars" element={<Cars />} />
+            <Route path="add-car" element={<AddCar />} />
             <Route path="/" element={<Navigate to="cars" replace />} />
           </Route>
         </Routes>
