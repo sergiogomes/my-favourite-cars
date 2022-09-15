@@ -1,10 +1,15 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { MdDelete, MdEdit } from 'react-icons/md';
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { removeCarAsync, selectCarList } from './carsSlice';
 import { ICar } from '../../interfaces/ICar';
 import styles from './Cars.module.css';
+import H1 from '../../style/elements/H1';
+import StyledLink from '../../style/elements/StyledLink';
+import StyledList from '../../style/blocks/StyledList';
+import Button from '../../style/elements/Button';
 
 export default function Cars() {
   const navigate = useNavigate();
@@ -18,49 +23,49 @@ export default function Cars() {
   return (
     <div>
       <div className={styles.row}>
-        <h1>My Favourite Cars</h1>
+        <H1>My Favourite Cars</H1>
       </div>
       <div className={styles.row}>
         {cars.length > 0 && (
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>NAME</th>
-                <th>BRAND</th>
-                <th>HORSEPOWER</th>
-                <th>ACTIONS</th>
-              </tr>
-            </thead>
-            <tbody>
+          <StyledList>
+            <StyledList.Thead>
+              <StyledList.Thead.Tr>
+                <StyledList.Th textAlignment="right">ID</StyledList.Th>
+                <StyledList.Th>NAME</StyledList.Th>
+                <StyledList.Th>BRAND</StyledList.Th>
+                <StyledList.Th textAlignment="right">HORSEPOWER</StyledList.Th>
+                <StyledList.Th textAlignment="center">ACTIONS</StyledList.Th>
+              </StyledList.Thead.Tr>
+            </StyledList.Thead>
+            <StyledList.Tbody>
               {cars.map((car) => (
-                <tr key={car.id}>
-                  <td>{car.id}</td>
-                  <td>{car.name}</td>
-                  <td>{car.brand}</td>
-                  <td>{car.horsepower}</td>
-                  <td>
-                    <Link className={styles.button} to={`/cars/${car.id}`}>
-                      Edit
-                    </Link>
-                    <button
+                <StyledList.Tbody.Tr key={car.id}>
+                  <StyledList.Td textAlignment="right">{car.id}</StyledList.Td>
+                  <StyledList.Td>{car.name}</StyledList.Td>
+                  <StyledList.Td>{car.brand}</StyledList.Td>
+                  <StyledList.Td textAlignment="right">
+                    {car.horsepower}
+                  </StyledList.Td>
+                  <StyledList.Td textAlignment="center" hasActions>
+                    <StyledLink isIcon to={`/cars/${car.id}`}>
+                      <MdEdit />
+                    </StyledLink>
+                    <Button
                       type="button"
-                      className={styles.asyncButton}
+                      isIcon
                       onClick={() => handleDelete(car)}
                     >
-                      Remove
-                    </button>
-                  </td>
-                </tr>
+                      <MdDelete />
+                    </Button>
+                  </StyledList.Td>
+                </StyledList.Tbody.Tr>
               ))}
-            </tbody>
-          </table>
+            </StyledList.Tbody>
+          </StyledList>
         )}
       </div>
       <div className={styles.row}>
-        <Link className={styles.button} to="/add-car">
-          Add New Car
-        </Link>
+        <StyledLink to="/add-car">ADD NEW CAR</StyledLink>
       </div>
     </div>
   );

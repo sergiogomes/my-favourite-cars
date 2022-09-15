@@ -9,8 +9,6 @@ import Copyright from './Copyright';
 
 const StyledFooter: any = styled.footer`
   height: 400px;
-  position: absolute;
-  bottom: 0;
   background: #fff;
   display: flex;
   flex-direction: column;
