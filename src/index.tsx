@@ -7,7 +7,7 @@ import { store } from './app/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Brands from './features/brands/Brands';
-import Counter from './features/counter/Counter';
+import About from './features/about/About';
 import Cars from './features/cars';
 import AddCar from './features/cars/components';
 import './index.css';
@@ -21,7 +21,7 @@ root.render(
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />}>
-            <Route path="counter" element={<Counter />} />
+            <Route path="about" element={<About />} />
             <Route path="brands" element={<Brands />} />
             <Route path="cars" element={<Cars />} />
             <Route path="add-car" element={<AddCar />} />

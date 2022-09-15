@@ -1,9 +1,9 @@
 import React from 'react';
 
-export default function Brands() {
+export default function About() {
   return (
     <div>
-      <h1>Brands</h1>
+      <h1>About</h1>
       <p>Under construction</p>
     </div>
   );

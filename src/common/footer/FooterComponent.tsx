@@ -16,9 +16,6 @@ export default function FooterComponent() {
       <StyledFooter.Section>
         <StyledFooter.Links>
           <StyledFooter.Link>
-            <Link to="/home">Home</Link>
-          </StyledFooter.Link>
-          <StyledFooter.Link>
             <Link to="/cars">Cars</Link>
           </StyledFooter.Link>
           <StyledFooter.Link>

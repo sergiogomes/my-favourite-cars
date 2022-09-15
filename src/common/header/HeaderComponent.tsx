@@ -13,9 +13,6 @@ export default function HeaderComponent() {
       </StyledHeader.Logo>
       <StyledHeader.Links>
         <StyledHeader.Link>
-          <Link to="/counter">Counter</Link>
-        </StyledHeader.Link>
-        <StyledHeader.Link>
           <Link to="/cars">Cars</Link>
         </StyledHeader.Link>
         <StyledHeader.Link>
