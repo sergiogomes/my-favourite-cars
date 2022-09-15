@@ -38,7 +38,7 @@ export default function Cars() {
                   <td>{car.id}</td>
                   <td>{car.name}</td>
                   <td>{car.brand}</td>
-                  <td>{car.hp}</td>
+                  <td>{car.horsepower}</td>
                   <td>
                     <Link className={styles.button} to={`/cars/${car.id}`}>
                       Edit

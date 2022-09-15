@@ -1,87 +1,112 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Formik, Form, FormikProps, FormikHelpers } from 'formik';
+import * as Yup from 'yup';
 
 import { useAppDispatch } from '../../../../app/hooks';
 import { ICar } from '../../../../interfaces/ICar';
 import { addCarAsync } from '../../carsSlice';
-import styles from './AddCar.module.css';
 
 const initialState: ICar = {
   id: 0,
   name: '',
   brand: '',
-  hp: 0,
+  horsepower: 0,
 };
+
+const validationSchema = Yup.object().shape({
+  name: Yup.string()
+    .required('Please enter the name')
+    .min(3, 'Must be at least 3 digits')
+    .max(20, 'Must be at maximum 20 digits'),
+  brand: Yup.string().required('Please enter the brand'),
+  horsepower: Yup.number().required().positive('Please enter the horsepower'),
+});
 
 export default function AddCar() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [car, setCar] = useState<ICar>(initialState);
 
-  const handleChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = evt.target;
+  const handleSubmit = (values: ICar, actions: FormikHelpers<ICar>) => {
+    actions.setSubmitting(true);
 
-    setCar({
-      ...car,
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = (evt: React.FormEvent<HTMLFormElement>) => {
-    evt.preventDefault();
-    dispatch(addCarAsync(car))
-      .then(() => navigate('/cars'))
+    dispatch(addCarAsync(values))
+      .then(() => {
+        navigate('/cars');
+        setTimeout(() => {
+          actions.setSubmitting(false);
+        }, 500);
+      })
       .catch(() => navigate('/error'));
   };
 
   return (
     <div>
-      <div className={styles.row}>
+      <div>
         <h1>Add New Car</h1>
       </div>
-      <form onSubmit={handleSubmit}>
-        <div className={styles.row}>
-          <p>Name *</p>
-          <input
-            id="name"
-            name="name"
-            type="text"
-            className={styles.textbox}
-            aria-label="Car Name"
-            value={car.name}
-            onChange={handleChange}
-          />
-        </div>
-        <div className={styles.row}>
-          <p>Brand *</p>
-          <input
-            id="brand"
-            name="brand"
-            type="text"
-            className={styles.textbox}
-            aria-label="Car Brand"
-            value={car.brand}
-            onChange={handleChange}
-          />
-        </div>
-        <div className={styles.row}>
-          <p>Horsepower *</p>
-          <input
-            id="hp"
-            name="hp"
-            type="number"
-            className={styles.textbox}
-            aria-label="Car Horsepower"
-            value={car.hp}
-            onChange={handleChange}
-          />
-        </div>
-        <div className={styles.row}>
-          <button type="submit" className={styles.asyncButton}>
-            Add
-          </button>
-        </div>
-      </form>
+
+      <Formik
+        initialValues={initialState}
+        onSubmit={handleSubmit}
+        validationSchema={validationSchema}
+      >
+        {(props: FormikProps<ICar>) => {
+          const {
+            values,
+            touched,
+            errors,
+            handleBlur,
+            handleChange,
+            isSubmitting,
+          } = props;
+          return (
+            <Form>
+              <input
+                name="name"
+                id="name"
+                value={values.name}
+                type="text"
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <div>
+                {errors.name && touched.name && <small>{errors.name}</small>}
+              </div>
+
+              <input
+                name="brand"
+                id="brand"
+                value={values.brand}
+                type="text"
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <div>
+                {errors.brand && touched.brand && <small>{errors.brand}</small>}
+              </div>
+
+              <input
+                name="horsepower"
+                id="horsepower"
+                value={values.horsepower}
+                type="number"
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+              <div>
+                {errors.horsepower && touched.horsepower && (
+                  <small>{errors.horsepower}</small>
+                )}
+              </div>
+
+              <button type="submit" color="secondary" disabled={isSubmitting}>
+                Submit
+              </button>
+            </Form>
+          );
+        }}
+      </Formik>
     </div>
   );
 }

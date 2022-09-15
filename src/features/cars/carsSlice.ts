@@ -20,7 +20,9 @@ export const addCarAsync = createAsyncThunk(
   async (car: ICar, thunkAPI) => {
     try {
       const state = thunkAPI.getState() as RootState;
-      car.id = state.cars.list.length + 1 || 0;
+      const { list } = state.cars;
+      car.id = list.length > 0 ? list[list.length - 1].id + 1 : 0;
+
       const response = await fetchAPI(car);
 
       return response.data;
