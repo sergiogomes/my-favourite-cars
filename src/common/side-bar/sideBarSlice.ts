@@ -4,11 +4,11 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../../app/store';
 
 export interface SideBarState {
-  visible: boolean;
+  visible: 'on' | 'off';
 }
 
 const initialState: SideBarState = {
-  visible: false,
+  visible: 'off',
 };
 
 export const sideBarSlice = createSlice({
@@ -16,7 +16,7 @@ export const sideBarSlice = createSlice({
   initialState,
   reducers: {
     toggle: (state) => {
-      state.visible = !state.visible;
+      state.visible = state.visible === 'on' ? 'off' : 'on';
     },
   },
 });
