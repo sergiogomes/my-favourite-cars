@@ -8,7 +8,7 @@ const Actions = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-align: right;
+  align-items: center;
 
   @media ${device.laptop} {
     width: 300px;

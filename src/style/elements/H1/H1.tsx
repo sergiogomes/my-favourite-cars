@@ -14,6 +14,7 @@ const H1 = styled.h1`
   font-weight: 400;
   font-family: Georgia, serif;
   letter-spacing: 0;
+  text-align: center;
 
   @media ${device.tablet} {
     font-size: 30px;

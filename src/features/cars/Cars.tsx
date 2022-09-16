@@ -5,11 +5,12 @@ import { MdDelete, MdEdit } from 'react-icons/md';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { removeCarAsync, selectCarList } from './carsSlice';
 import { ICar } from '../../interfaces/ICar';
-import styles from './Cars.module.css';
-import H1 from '../../style/elements/H1';
+
 import StyledLink from '../../style/elements/StyledLink';
-import StyledList from '../../style/blocks/StyledList';
+import StyledTable from '../../style/blocks/StyledTable';
 import Button from '../../style/elements/Button';
+import H1 from '../../style/elements/H1';
+import P from '../../style/elements/P';
 
 export default function Cars() {
   const navigate = useNavigate();
@@ -22,31 +23,36 @@ export default function Cars() {
 
   return (
     <div>
-      <div className={styles.row}>
+      <div>
         <H1>My Favourite Cars</H1>
+        <P>Add your favourite cars here</P>
       </div>
-      <div className={styles.row}>
+      <div>
         {cars.length > 0 && (
-          <StyledList>
-            <StyledList.Thead>
-              <StyledList.Thead.Tr>
-                <StyledList.Th textAlignment="right">ID</StyledList.Th>
-                <StyledList.Th>NAME</StyledList.Th>
-                <StyledList.Th>BRAND</StyledList.Th>
-                <StyledList.Th textAlignment="right">HORSEPOWER</StyledList.Th>
-                <StyledList.Th textAlignment="center">ACTIONS</StyledList.Th>
-              </StyledList.Thead.Tr>
-            </StyledList.Thead>
-            <StyledList.Tbody>
+          <StyledTable>
+            <StyledTable.Thead>
+              <StyledTable.Thead.Tr>
+                <StyledTable.Th textAlignment="right">ID</StyledTable.Th>
+                <StyledTable.Th>NAME</StyledTable.Th>
+                <StyledTable.Th>BRAND</StyledTable.Th>
+                <StyledTable.Th textAlignment="right">
+                  HORSEPOWER
+                </StyledTable.Th>
+                <StyledTable.Th textAlignment="center">ACTIONS</StyledTable.Th>
+              </StyledTable.Thead.Tr>
+            </StyledTable.Thead>
+            <StyledTable.Tbody>
               {cars.map((car) => (
-                <StyledList.Tbody.Tr key={car.id}>
-                  <StyledList.Td textAlignment="right">{car.id}</StyledList.Td>
-                  <StyledList.Td>{car.name}</StyledList.Td>
-                  <StyledList.Td>{car.brand}</StyledList.Td>
-                  <StyledList.Td textAlignment="right">
+                <StyledTable.Tbody.Tr key={car.id}>
+                  <StyledTable.Td textAlignment="right">
+                    {car.id}
+                  </StyledTable.Td>
+                  <StyledTable.Td>{car.name}</StyledTable.Td>
+                  <StyledTable.Td>{car.brand}</StyledTable.Td>
+                  <StyledTable.Td textAlignment="right">
                     {car.horsepower}
-                  </StyledList.Td>
-                  <StyledList.Td textAlignment="center" hasActions>
+                  </StyledTable.Td>
+                  <StyledTable.Td textAlignment="center" hasActions>
                     <StyledLink isIcon to={`/cars/${car.id}`}>
                       <MdEdit />
                     </StyledLink>
@@ -57,14 +63,14 @@ export default function Cars() {
                     >
                       <MdDelete />
                     </Button>
-                  </StyledList.Td>
-                </StyledList.Tbody.Tr>
+                  </StyledTable.Td>
+                </StyledTable.Tbody.Tr>
               ))}
-            </StyledList.Tbody>
-          </StyledList>
+            </StyledTable.Tbody>
+          </StyledTable>
         )}
       </div>
-      <div className={styles.row}>
+      <div>
         <StyledLink to="/add-car">ADD NEW CAR</StyledLink>
       </div>
     </div>

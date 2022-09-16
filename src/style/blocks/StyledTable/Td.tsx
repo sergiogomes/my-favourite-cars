@@ -8,7 +8,7 @@ type TdProps = {
 };
 
 const Td = styled.td<TdProps>`
-  padding: 12px 15px;
+  padding: 6px;
   color: #222;
   font-size: 13px;
   font-family: Georgia, serif;
@@ -17,6 +17,7 @@ const Td = styled.td<TdProps>`
   text-overflow: ellipsis;
 
   @media ${device.tablet} {
+    padding: 12px 15px;
     font-size: 14px;
     line-height: 20px;
     letter-spacing: 0;
@@ -38,7 +39,7 @@ const Td = styled.td<TdProps>`
     css`
       display: flex;
       min-width: 120px;
-      justify-content: space-between;
+      justify-content: space-evenly;
     `}
 `;
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { MdMenu, MdPersonOutline } from 'react-icons/md';
 
 import logoBrand from '../../assets/images/logo-brand.png';
 import StyledHeader from '../../style/blocks/StyledHeader';
@@ -7,7 +8,9 @@ import StyledHeader from '../../style/blocks/StyledHeader';
 export default function HeaderComponent() {
   return (
     <StyledHeader>
-      <StyledHeader.Menu>|||</StyledHeader.Menu>
+      <StyledHeader.Menu>
+        <MdMenu />
+      </StyledHeader.Menu>
       <StyledHeader.Logo>
         <img src={logoBrand} alt="logo brand" />
       </StyledHeader.Logo>
@@ -19,7 +22,9 @@ export default function HeaderComponent() {
           <Link to="/brands">Brands</Link>
         </StyledHeader.Link>
       </StyledHeader.Links>
-      <StyledHeader.Actions>O</StyledHeader.Actions>
+      <StyledHeader.Actions>
+        <MdPersonOutline />
+      </StyledHeader.Actions>
     </StyledHeader>
   );
 }
