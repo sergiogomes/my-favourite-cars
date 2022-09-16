@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectVisibility, toggle } from './sideBarSlice';
 
 import logoBrand from '../../assets/images/logo-brand.png';
-import StyledSideBar from '../../style/blocks/StyleSideBar';
+import StyledSideBar from '../../style/blocks/StyledSideBar';
 
 export default function SideBarComponent() {
   const visibility = useAppSelector(selectVisibility);

@@ -8,7 +8,7 @@ const StyledSideBar: any = styled.aside<AsideProps>`
   position: fixed;
   top: 0;
   bottom: 0;
-  left: 0;
+  left: -100vw;
   right: 0;
   background: #fff;
   height: 100%;
@@ -23,7 +23,7 @@ const StyledSideBar: any = styled.aside<AsideProps>`
   ${({ visibility }) =>
     visibility === 'on' &&
     css`
-      left: -100vw;
+      left: 0;
     `}
 `;
 
