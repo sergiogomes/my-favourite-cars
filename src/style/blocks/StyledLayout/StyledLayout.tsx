@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { device } from '../../device';
 
 const StyledLayout: any = styled.main`
-  min-height: calc(100vh - 60px);
+  min-height: calc(100vh - 60px - 400px);
   background: #fff;
   width: 100%;
   padding: 40px 20px;
@@ -12,11 +12,12 @@ const StyledLayout: any = styled.main`
   justify-content: center;
 
   @media ${device.tablet} {
+    min-height: calc(100vh - 60px - 200px);
     padding: 60px 60px;
   }
 
   @media ${device.laptop} {
-    min-height: calc(100vh - 90px);
+    min-height: calc(100vh - 90px - 200px);
     padding: 70px 40px;
   }
 

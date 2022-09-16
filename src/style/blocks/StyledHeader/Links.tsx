@@ -10,6 +10,7 @@ const Links = styled.ul`
   height: 100%;
   justify-content: space-evenly;
   width: 400px;
+  margin: 0;
 
   @media ${device.laptop} {
     display: flex;
