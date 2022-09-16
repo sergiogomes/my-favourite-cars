@@ -45,7 +45,7 @@ describe('cars reducer', () => {
       brand: 'VW',
       horsepower: 120
     }
-    store.dispatch(addCarAsync(car))
+    store.dispatch<any>(addCarAsync(car))
 
     const actions = store.getActions();
     const { requestId } = actions[0].meta
