@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { MdDelete, MdEdit } from 'react-icons/md';
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
@@ -23,6 +23,7 @@ export default function Cars() {
 
   return (
     <div>
+      <Outlet />
       <div>
         <H1>My Favourite Cars</H1>
         <P>Add your favourite cars here</P>
@@ -53,12 +54,12 @@ export default function Cars() {
                     {car.horsepower}
                   </StyledTable.Td>
                   <StyledTable.Td textAlignment="center" hasActions>
-                    <StyledLink isIcon to={`/cars/${car.id}`}>
+                    <StyledLink isicon="on" to={`/cars/${car.id}`}>
                       <MdEdit />
                     </StyledLink>
                     <Button
                       type="button"
-                      isIcon
+                      isicon="on"
                       onClick={() => handleDelete(car)}
                     >
                       <MdDelete />
@@ -71,7 +72,7 @@ export default function Cars() {
         )}
       </div>
       <div>
-        <StyledLink to="/add-car">ADD NEW CAR</StyledLink>
+        <StyledLink to="/cars/new">ADD NEW CAR</StyledLink>
       </div>
     </div>
   );
