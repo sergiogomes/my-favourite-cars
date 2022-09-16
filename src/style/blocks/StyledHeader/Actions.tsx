@@ -13,6 +13,17 @@ const Actions = styled.div`
   @media ${device.laptop} {
     width: 300px;
   }
+
+  svg {
+    width: 25px;
+    height: 25px;
+    color: #222;
+
+    &:hover {
+      color: #696969;
+      cursor: pointer;
+    }
+  }
 `;
 
 export default Actions;

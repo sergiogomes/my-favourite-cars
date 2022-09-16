@@ -1,10 +1,12 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 
 import carsReducer from '../features/cars/carsSlice';
+import sideBarReducer from '../common/side-bar/sideBarSlice';
 
 export const store = configureStore({
   reducer: {
     cars: carsReducer,
+    sideBar: sideBarReducer,
   },
 });
 
