@@ -1,10 +1,12 @@
+import { Link } from 'react-router-dom';
+
 import styled, { css } from 'styled-components';
 
-type ButtonProps = {
+type LinkProps = {
   isIcon?: boolean;
 };
 
-const Button = styled.button<ButtonProps>`
+const StyledLink = styled(Link)<LinkProps>`
   padding: 16px 58px;
   color: #fff;
   font-size: 14px;
@@ -13,6 +15,7 @@ const Button = styled.button<ButtonProps>`
   letter-spacing: 1px;
   text-align: left;
   background: #222;
+  text-decoration: none;
   transition: 0.3s;
   cursor: pointer;
   border: unset;
@@ -40,4 +43,4 @@ const Button = styled.button<ButtonProps>`
     `}
 `;
 
-export default Button;
+export default StyledLink;

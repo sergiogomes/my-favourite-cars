@@ -1,17 +1,23 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Formik, Form, FormikProps, FormikHelpers } from 'formik';
+import { Formik, FormikProps, FormikHelpers } from 'formik';
 import * as Yup from 'yup';
 
 import { useAppDispatch } from '../../../../app/hooks';
 import { ICar } from '../../../../interfaces/ICar';
 import { addCarAsync } from '../../carsSlice';
 
+import StyledField from '../../../../style/blocks/StyledField';
+import StyledForm from '../../../../style/blocks/StyledForm';
+import Button from '../../../../style/elements/Button';
+import H1 from '../../../../style/elements/H1';
+import P from '../../../../style/elements/P';
+
 const initialState: ICar = {
   id: 0,
   name: '',
   brand: '',
-  horsepower: 0,
+  horsepower: '',
 };
 
 const validationSchema = Yup.object().shape({
@@ -20,7 +26,9 @@ const validationSchema = Yup.object().shape({
     .min(3, 'Must be at least 3 digits')
     .max(20, 'Must be at maximum 20 digits'),
   brand: Yup.string().required('Please enter the brand'),
-  horsepower: Yup.number().required().positive('Please enter the horsepower'),
+  horsepower: Yup.number()
+    .positive('Please enter the horsepower')
+    .required('Please enter the horsepower'),
 });
 
 export default function AddCar() {
@@ -43,7 +51,8 @@ export default function AddCar() {
   return (
     <div>
       <div>
-        <h1>Add New Car</h1>
+        <H1>Add New Car</H1>
+        <P>Fill in the name, brand and horsepower</P>
       </div>
 
       <Formik
@@ -61,49 +70,66 @@ export default function AddCar() {
             isSubmitting,
           } = props;
           return (
-            <Form>
-              <input
-                name="name"
-                id="name"
-                value={values.name}
-                type="text"
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-              <div>
-                {errors.name && touched.name && <small>{errors.name}</small>}
-              </div>
+            <StyledForm>
+              <StyledField>
+                <StyledField.Label htmlFor="name">
+                  <StyledField.Input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter the name"
+                    value={values.name}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                </StyledField.Label>
+                <StyledField.Error>
+                  {errors.name && touched.name && <small>{errors.name}</small>}
+                </StyledField.Error>
+              </StyledField>
 
-              <input
-                name="brand"
-                id="brand"
-                value={values.brand}
-                type="text"
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-              <div>
-                {errors.brand && touched.brand && <small>{errors.brand}</small>}
-              </div>
+              <StyledField>
+                <StyledField.Label htmlFor="brand">
+                  <StyledField.Input
+                    type="text"
+                    id="brand"
+                    name="brand"
+                    placeholder="Enter the brand"
+                    value={values.brand}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                </StyledField.Label>
+                <StyledField.Error>
+                  {errors.brand && touched.brand && (
+                    <small>{errors.brand}</small>
+                  )}
+                </StyledField.Error>
+              </StyledField>
 
-              <input
-                name="horsepower"
-                id="horsepower"
-                value={values.horsepower}
-                type="number"
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-              <div>
-                {errors.horsepower && touched.horsepower && (
-                  <small>{errors.horsepower}</small>
-                )}
-              </div>
+              <StyledField>
+                <StyledField.Label htmlFor="brand">
+                  <StyledField.Input
+                    type="number"
+                    id="horsepower"
+                    name="horsepower"
+                    placeholder="Enter the horsepower"
+                    value={values.horsepower}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                </StyledField.Label>
+                <StyledField.Error>
+                  {errors.horsepower && touched.horsepower && (
+                    <small>{errors.horsepower}</small>
+                  )}
+                </StyledField.Error>
+              </StyledField>
 
-              <button type="submit" color="secondary" disabled={isSubmitting}>
-                Submit
-              </button>
-            </Form>
+              <Button type="submit" color="secondary" disabled={isSubmitting}>
+                SUBMIT
+              </Button>
+            </StyledForm>
           );
         }}
       </Formik>

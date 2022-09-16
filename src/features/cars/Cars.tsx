@@ -1,10 +1,16 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { MdDelete, MdEdit } from 'react-icons/md';
 
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { removeCarAsync, selectCarList } from './carsSlice';
 import { ICar } from '../../interfaces/ICar';
-import styles from './Cars.module.css';
+
+import StyledLink from '../../style/elements/StyledLink';
+import StyledTable from '../../style/blocks/StyledTable';
+import Button from '../../style/elements/Button';
+import H1 from '../../style/elements/H1';
+import P from '../../style/elements/P';
 
 export default function Cars() {
   const navigate = useNavigate();
@@ -17,50 +23,55 @@ export default function Cars() {
 
   return (
     <div>
-      <div className={styles.row}>
-        <h1>My Favourite Cars</h1>
+      <div>
+        <H1>My Favourite Cars</H1>
+        <P>Add your favourite cars here</P>
       </div>
-      <div className={styles.row}>
+      <div>
         {cars.length > 0 && (
-          <table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>NAME</th>
-                <th>BRAND</th>
-                <th>HORSEPOWER</th>
-                <th>ACTIONS</th>
-              </tr>
-            </thead>
-            <tbody>
+          <StyledTable>
+            <StyledTable.Thead>
+              <StyledTable.Thead.Tr>
+                <StyledTable.Th textAlignment="right">ID</StyledTable.Th>
+                <StyledTable.Th>NAME</StyledTable.Th>
+                <StyledTable.Th>BRAND</StyledTable.Th>
+                <StyledTable.Th textAlignment="right">
+                  HORSEPOWER
+                </StyledTable.Th>
+                <StyledTable.Th textAlignment="center">ACTIONS</StyledTable.Th>
+              </StyledTable.Thead.Tr>
+            </StyledTable.Thead>
+            <StyledTable.Tbody>
               {cars.map((car) => (
-                <tr key={car.id}>
-                  <td>{car.id}</td>
-                  <td>{car.name}</td>
-                  <td>{car.brand}</td>
-                  <td>{car.horsepower}</td>
-                  <td>
-                    <Link className={styles.button} to={`/cars/${car.id}`}>
-                      Edit
-                    </Link>
-                    <button
+                <StyledTable.Tbody.Tr key={car.id}>
+                  <StyledTable.Td textAlignment="right">
+                    {car.id}
+                  </StyledTable.Td>
+                  <StyledTable.Td>{car.name}</StyledTable.Td>
+                  <StyledTable.Td>{car.brand}</StyledTable.Td>
+                  <StyledTable.Td textAlignment="right">
+                    {car.horsepower}
+                  </StyledTable.Td>
+                  <StyledTable.Td textAlignment="center" hasActions>
+                    <StyledLink isIcon to={`/cars/${car.id}`}>
+                      <MdEdit />
+                    </StyledLink>
+                    <Button
                       type="button"
-                      className={styles.asyncButton}
+                      isIcon
                       onClick={() => handleDelete(car)}
                     >
-                      Remove
-                    </button>
-                  </td>
-                </tr>
+                      <MdDelete />
+                    </Button>
+                  </StyledTable.Td>
+                </StyledTable.Tbody.Tr>
               ))}
-            </tbody>
-          </table>
+            </StyledTable.Tbody>
+          </StyledTable>
         )}
       </div>
-      <div className={styles.row}>
-        <Link className={styles.button} to="/add-car">
-          Add New Car
-        </Link>
+      <div>
+        <StyledLink to="/add-car">ADD NEW CAR</StyledLink>
       </div>
     </div>
   );
