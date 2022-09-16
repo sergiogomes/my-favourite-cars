@@ -158,11 +158,7 @@ export default function Car() {
                   </StyledField.Error>
                 </StyledField>
 
-                <Button
-                  type="submit"
-                  color="secondary"
-                  disabled={isSubmitting}
-                >
+                <Button type="submit" color="secondary" disabled={isSubmitting}>
                   SUBMIT
                 </Button>
               </StyledForm>
