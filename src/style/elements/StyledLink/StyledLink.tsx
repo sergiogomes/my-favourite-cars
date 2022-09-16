@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 type LinkProps = {
-  isIcon?: boolean;
+  isicon?: 'on' | 'off';
 };
 
 const StyledLink = styled(Link)<LinkProps>`
@@ -28,8 +28,8 @@ const StyledLink = styled(Link)<LinkProps>`
     background-color: #a79bdf;
   }
 
-  ${({ isIcon }) =>
-    isIcon &&
+  ${({ isicon }) =>
+    isicon === 'on' &&
     css`
       width: 40px;
       min-width: 40px;

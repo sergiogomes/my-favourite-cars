@@ -9,7 +9,7 @@ import reportWebVitals from './reportWebVitals';
 import Brands from './features/brands/Brands';
 import About from './features/about/About';
 import Cars from './features/cars';
-import AddCar from './features/cars/components';
+import Car from './features/cars/components/car';
 import './index.css';
 
 const container = document.getElementById('root')!;
@@ -24,7 +24,7 @@ root.render(
             <Route path="about" element={<About />} />
             <Route path="brands" element={<Brands />} />
             <Route path="cars" element={<Cars />} />
-            <Route path="add-car" element={<AddCar />} />
+            <Route path="cars/:carId" element={<Car />} />
             <Route path="/" element={<Navigate to="cars" replace />} />
           </Route>
         </Routes>

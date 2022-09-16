@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 type ButtonProps = {
-  isIcon?: boolean;
+  isicon?: 'on' | 'off';
 };
 
 const Button = styled.button<ButtonProps>`
@@ -25,8 +25,8 @@ const Button = styled.button<ButtonProps>`
     background-color: #a79bdf;
   }
 
-  ${({ isIcon }) =>
-    isIcon &&
+  ${({ isicon }) =>
+    isicon === 'on' &&
     css`
       width: 40px;
       min-width: 40px;

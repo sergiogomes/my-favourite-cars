@@ -41,6 +41,15 @@ export const removeCarAsync = createAsyncThunk(
   },
 );
 
+export const editCarAsync = createAsyncThunk(
+  'cars/editCar',
+  async (car: ICar) => {
+    const response = await fetchAPI(car);
+
+    return response.data;
+  },
+);
+
 export const carsSlice = createSlice({
   name: 'cars',
   initialState,
@@ -67,6 +76,23 @@ export const carsSlice = createSlice({
         state.status = 'idle';
       })
       .addCase(removeCarAsync.rejected, (state) => {
+        state.status = 'failed';
+      })
+      .addCase(editCarAsync.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(editCarAsync.fulfilled, (state, action) => {
+        const { id, name, brand, horsepower } = action.payload;
+        const carFound = state.list.find((car) => car.id === id);
+        if (carFound) {
+          carFound.id = id;
+          carFound.name = name;
+          carFound.brand = brand;
+          carFound.horsepower = horsepower;
+        }
+        state.status = 'idle';
+      })
+      .addCase(editCarAsync.rejected, (state) => {
         state.status = 'failed';
       });
   },

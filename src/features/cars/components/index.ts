@@ -1,3 +1,3 @@
-import AddCar from './add-car';
+import Car from './car';
 
-export default AddCar;
+export default Car;

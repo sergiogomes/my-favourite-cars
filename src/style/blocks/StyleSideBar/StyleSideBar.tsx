@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 type AsideProps = {
-  visibility?: boolean;
+  visibility?: 'on' | 'off';
 };
 
 const StyledSideBar: any = styled.aside<AsideProps>`
@@ -18,10 +18,10 @@ const StyledSideBar: any = styled.aside<AsideProps>`
   align-items: center;
   justify-content: space-around;
   border-right: 1px solid #eaeaea;
-  transition: 2s;
+  transition: 1s;
 
   ${({ visibility }) =>
-    visibility &&
+    visibility === 'on' &&
     css`
       left: -100vw;
     `}
